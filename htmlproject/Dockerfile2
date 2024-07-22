@@ -1,0 +1,5 @@
+FROM nginx:1.27
+LABEL Author="Shahinur"
+LABEL Application="html_rent4u"
+EXPOSE 80
+COPY rent4u-html /usr/share/nginx/html/rentshortcut
