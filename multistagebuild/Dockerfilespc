@@ -1,0 +1,11 @@
+FROM maven:3.9.8 AS build
+LABEL author="Shahinur Islam Ahmed"
+LABEL application="spring-petclinic"
+RUN git clone "https://github.com/spring-projects/spring-petclinic.git"
+RUN cd spring-petclinic/ && mvn clean install
+FROM amazoncorretto:17
+RUN mkdir /app
+COPY --from=build  spring-petclinic/target/spring-petclinic-3.3.0-SNAPSHOT.jar  /app
+WORKDIR /app
+EXPOSE 8080
+CMD [ "java","-jar","spring-petclinic-3.3.0-SNAPSHOT.jar"]
